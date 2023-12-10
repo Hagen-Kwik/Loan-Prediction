@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fast Loan</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css.css" />
+    <link rel="icon" href="loan_logo.png" type="image/x-icon" />
+  </head>
+
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid d-flex justify-content-between align-items-center">
+        <a class="navbar-brand" href="#">
+          <img src="loan_logo.png" alt="Logo" height="70" class="d-inline-block align-text-top" />
+          Loan Prediction
+        </a>
+      </div>
+    </nav>
+
+    <!-- Main Code -->
+    <div class="container-fluid">
+      <div class="row">
+        <!-- First half -->
+        <div class="col-md-6 text-black p-5">
+          <h2>Loan Application Form</h2>
+
+          <form id="loanForm">
+            <div class="mb-3">
+              <label for="loanAmount" class="form-label">Loan Amount</label>
+
+              <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input type="number" class="form-control" id="loanAmount" name="loan_amnt" required />
+              </div>
+            </div>
+
+            <div class="mb-3 row">
+              <label for="loanTerm" class="form-label">Term (in months)</label>
+
+              <div class="form-check col">
+                <input class="form-check-input" type="radio" name="term" id="term36" value="36" required />
+                <label class="form-check-label" for="term36">36 months</label>
+              </div>
+
+              <div class="form-check col">
+                <input class="form-check-input" type="radio" name="term" id="term60" value="60" required />
+                <label class="form-check-label" for="term60">60 months</label>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="interestRate" class="form-label">Interest Rate</label>
+
+              <div class="input-group">
+                <input type="number" class="form-control" id="interestRate" name="int_rate" required />
+                <span class="input-group-text">%</span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="installment" class="form-label">Installment</label>
+
+              <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input type="number" class="form-control" id="installment" name="installment" required />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="employmentLength" class="form-label">Employment Length</label>
+
+              <select class="form-select" id="employmentLength" name="emp_length" required>
+                <option value="" selected disabled>Select Employment Length</option>
+                <option value="10">< 1 year</option>
+                <option value="0">1 year</option>
+                <option value="2">2 years</option>
+                <option value="3">3 years</option>
+                <option value="4">4 years</option>
+                <option value="5">5 years</option>
+                <option value="6">6 years</option>
+                <option value="7">7 years</option>
+                <option value="8">8 years</option>
+                <option value="9">9 years</option>
+                <option value="1">10+ years</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="homeOwnership" class="form-label">Home Ownership</label>
+
+              <select class="form-select" id="homeOwnership" name="home_ownership" required>
+                <option value="" selected disabled>Select Home Ownership</option>
+                <option value="0">ANY</option>
+                <option value="1">MORTGAGE</option>
+                <option value="2">NONE</option>
+                <option value="3">OTHER</option>
+                <option value="4">OWN</option>
+                <option value="5">RENT</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="annualIncome" class="form-label">Annual Income</label>
+              <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input type="number" class="form-control" id="annualIncome" name="annual_inc" required />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="verificationStatus" class="form-label">Verification Status</label>
+
+              <select class="form-select" id="verificationStatus" name="verification_status" required>
+                <option value="" selected disabled>Select Verification Status</option>
+                <option value="0">Not Verified</option>
+                <option value="1">Source Verified</option>
+                <option value="2">Verified</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="dti" class="form-label">DTI (Debt-to-Income Ratio)</label>
+              <input type="number" class="form-control" id="dti" name="dti" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="openAccounts" class="form-label">Open Accounts</label>
+              <input type="number" class="form-control" id="openAccounts" name="open_acc" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="publicRecords" class="form-label">Public Records</label>
+              <input type="number" class="form-control" id="publicRecords" name="pub_rec" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="revolvingBalance" class="form-label">Revolving Balance</label>
+              <input type="number" class="form-control" id="revolvingBalance" name="revol_bal" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="revolvingUtilization" class="form-label">Revolving Utilization</label>
+              <input type="text" class="form-control" id="revolvingUtilization" name="revol_util" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="totalAccounts" class="form-label">Total Accounts</label>
+              <input type="number" class="form-control" id="totalAccounts" name="total_acc" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="applicationType" class="form-label">Application Type</label>
+              
+              <select class="form-select" id="applicationType" name="application_type" required>
+                  <option value="" selected disabled>Select Application Type</option>
+                  <option value="0">DIRECT_PAY</option>
+                  <option value="1">INDIVIDUAL</option>
+                  <option value="2">JOINT</option>
+              </select>
+          </div>
+          
+
+            <div class="mb-3">
+              <label for="mortgageAccounts" class="form-label">Mortgage Accounts</label>
+              <input type="number" class="form-control" id="mortgageAccounts" name="mort_acc" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="publicRecordsBankruptcies" class="form-label">Public Records Bankruptcies</label>
+              <input
+                type="number"
+                class="form-control"
+                id="publicRecordsBankruptcies"
+                name="pub_rec_bankruptcies"
+                required
+              />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Application</button>
+          </form>
+        </div>
+
+        <!-- Second half -->
+        <div class="col-md-6 text-black">
+          <div class="centered-square">
+            <div class="square-content">
+              <h2>Second Half</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<!-- loan_amnt                   0
+term                        0
+int_rate                    0
+installment                 0
+emp_length              18301
+home_ownership              0
+annual_inc                  0
+verification_status         0
+loan_status                 0
+dti                         0
+open_acc                    0
+pub_rec                     0
+revol_bal                   0
+revol_util                276
+total_acc                   0
+application_type            0
+mort_acc                37795
+pub_rec_bankruptcies      535 -->
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+  integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+  integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+  crossorigin="anonymous"
+></script>
