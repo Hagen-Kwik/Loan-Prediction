@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fast Loan</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css.css') }}" />
+    <link rel="icon" href="{{ url_for('static', filename='loan_logo.png') }}" type="image/x-icon" />
+    <style>
+      .slide {
+        display: none;
+      }
+
+      .slide.active {
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid d-flex justify-content-center align-items-center">
+        <div class="navbar-brand">
+          <img
+            src="{{ url_for('static', filename='loan_logo.png') }}"
+            alt="Logo"
+            height="70"
+            class="d-inline-block align-text-top"
+          />
+          <h3 class="d-none d-md-inline">Loan Prediction</h3>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Code -->
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Form Section -->
+        <div class="col-md-12 text-black p-5">
+          <form action="/predict" method="post">
+            <!-- Loan Amount Slide -->
+            <h1 class="mb-4 text-center">Loan Application Form</h1>
+            <div class="slide active">
+              <div class="mb-3">
+                <label for="loanAmount" class="form-label">Loan Amount</label>
+                <div class="input-group">
+                  <span class="input-group-text">$</span>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="loanAmount"
+                    name="loan_amnt"
+                    required
+                    min="1000"
+                    max="40000"
+                    placeholder="Enter amount between $1000 and $40000"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Term Slide -->
+            <div class="slide">
+              <div class="mb-3 row">
+                <label for="loanTerm" class="form-label">Term (in months)</label>
+                <div class="form-check col">
+                  <input class="form-check-input" type="radio" name="term" id="term36" value="0" required />
+                  <label class="form-check-label ms-2" for="term36"> 36 Months</label>
+                </div>
+                <div class="form-check col">
+                  <input class="form-check-input" type="radio" name="term" id="term60" value="1" required />
+                  <label class="form-check-label ms-2" for="term60"> 60 Months</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Interest Rate Slide -->
+            <div class="slide">
+              <div class="mb-3">
+                <label for="interestRate" class="form-label">Interest Rate</label>
+
+                <div class="input-group">
+                  <input type="number" class="form-control" id="interestRate" name="int_rate" step="0.01" required />
+                  <span class="input-group-text">%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Installment Slide -->
+            <div class="slide">
+              <div class="mb-3">
+                <label for="installment" class="form-label">Installment</label>
+                <div class="input-group">
+                  <span class="input-group-text">$</span>
+                  <input type="number" class="form-control" id="installment" name="installment" step="0.01" required />
+                </div>
+              </div>
+            </div>
+
+            <!-- employment Length Slide -->
+            <div class="slide">
+              <div class="mb-3">
+                <label for="employmentLength" class="form-label">Employment Length</label>
+
+                <select class="form-select" id="employmentLength" name="emp_length" required>
+                  <option value="" selected disabled>Select Employment Length</option>
+                  <option value="10">< 1 year</option>
+                  <option value="0">1 year</option>
+                  <option value="2">2 years</option>
+                  <option value="3">3 years</option>
+                  <option value="4">4 years</option>
+                  <option value="5">5 years</option>
+                  <option value="6">6 years</option>
+                  <option value="7">7 years</option>
+                  <option value="8">8 years</option>
+                  <option value="9">9 years</option>
+                  <option value="1">10+ years</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- home Ownership Slide -->
+            <div class="slide">
+              <div class="mb-3">
+                <label for="homeOwnership" class="form-label">Home Ownership</label>
+
+                <select class="form-select" id="homeOwnership" name="home_ownership" required>
+                  <option value="" selected disabled>Select Home Ownership</option>
+                  <option value="0">ANY</option>
+                  <option value="1">MORTGAGE</option>
+                  <option value="2">NONE</option>
+                  <option value="3">OTHER</option>
+                  <option value="4">OWN</option>
+                  <option value="5">RENT</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- annual Income Slide -->
+            <div class="slide">
+              <div class="mb-3">
+                <label for="annualIncome" class="form-label">Annual Income</label>
+                <div class="input-group">
+                  <span class="input-group-text">$</span>
+                  <input type="number" class="form-control" id="annualIncome" name="annual_inc" step="0.01" required />
+                </div>
+              </div>
+            </div>
+
+            <!-- Verification Status Slide -->
+            <div class="slide">
+              <div class="mb-3">
+                <label for="verificationStatus" class="form-label">Verification Status</label>
+                <select class="form-select" id="verificationStatus" name="verification_status" required>
+                  <option value="" selected disabled>Select Verification Status</option>
+                  <option value="0">Not Verified</option>
+                  <option value="1">Source Verified</option>
+                  <option value="2">Verified</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- DTI Slide -->
+            <div class="slide">
+              <div class="mb-3">
+                <label for="dti" class="form-label">DTI (Debt-to-Income Ratio)</label>
+                <input type="number" class="form-control" id="dti" name="dti" step="0.01" required />
+              </div>
+            </div>
+
+            <!-- Open Accounts Slide -->
+            <div class="slide">
+              <div class="mb-3">
+                <label for="openAccounts" class="form-label">Open Accounts</label>
+                <input type="number" class="form-control" id="openAccounts" name="open_acc" required />
+              </div>
+            </div>
+
+            <!-- Public Records Slide -->
+            <div class="slide">
+              <div class="mb-3">
+                <label for="publicRecords" class="form-label">Public Records</label>
+                <input type="number" class="form-control" id="publicRecords" name="pub_rec" required />
+              </div>
+            </div>
+
+            <!-- Revolving Balance Slide -->
+            <div class="slide">
+              <div class="mb-3">
+                <label for="revolvingBalance" class="form-label">Revolving Balance</label>
+                <input type="number" class="form-control" id="revolvingBalance" name="revol_bal" step="0.1" required />
+              </div>
+            </div>
+
+            <!-- Revolving Utilization Slide -->
+            <div class="slide">
+              <div class="mb-3">
+                <label for="revolvingUtilization" class="form-label">Revolving Utilization</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="revolvingUtilization"
+                  name="revol_util"
+                  step="0.1"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Total Accounts Slide -->
+            <div class="slide">
+              <div class="mb-3">
+                <label for="totalAccounts" class="form-label">Total Accounts</label>
+                <input type="number" class="form-control" id="totalAccounts" name="total_acc" required />
+              </div>
+            </div>
+
+            <!-- Application Type Slide -->
+            <div class="slide">
+              <div class="mb-3">
+                <label for="applicationType" class="form-label">Application Type</label>
+                <select class="form-select" id="applicationType" name="application_type" required>
+                  <option value="" selected disabled>Select Application Type</option>
+                  <option value="0">DIRECT_PAY</option>
+                  <option value="1">INDIVIDUAL</option>
+                  <option value="2">JOINT</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Mortgage Accounts Slide -->
+            <div class="slide">
+              <div class="mb-3">
+                <label for="mortgageAccounts" class="form-label">Mortgage Accounts</label>
+                <input type="number" class="form-control" id="mortgageAccounts" name="mort_acc" required />
+              </div>
+            </div>
+
+            <!-- Public Records Bankruptcies Slide -->
+            <div class="slide">
+              <div class="mb-3">
+                <label for="publicRecordsBankruptcies" class="form-label">Public Records Bankruptcies</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="publicRecordsBankruptcies"
+                  name="pub_rec_bankruptcies"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="btn-container">
+              <button type="button" class="btn btn-secondary" onclick="prevSlide()" id="prevButton">Previous</button>
+              <button type="button" class="btn btn-primary" onclick="nextSlide()" id="nextButton">Next</button>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="mb-2 mt-5 text-center" id="submitButtonContainer" style="display: none">
+              <button type="submit" class="btn btn-primary">Submit Application</button>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+      <div class="mb-2 text-center text-muted">
+        &copy; 2023 Hagen & Dhammiko. All rights reserved.
+        <!-- Copyright notice -->
+      </div>
+    </div>
+  </body>
+
+  <!-- Your script and stylesheet links remain the same -->
+  <script>
+    let currentSlide = 0;
+    const totalSlides = document.querySelectorAll(".slide").length;
+
+    function showSlide(index) {
+      const slides = document.querySelectorAll(".slide");
+      slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === index);
+      });
+
+      // Show or hide "Previous" button based on current slide
+      document.getElementById("prevButton").style.display = index === 0 ? "none" : "block";
+
+      // Show or hide "Submit" button based on current slide
+      document.getElementById("submitButtonContainer").style.display = index === totalSlides - 1 ? "block" : "none";
+
+      // Disable/Enable buttons based on current slide
+      document.getElementById("nextButton").disabled = index === totalSlides - 1;
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        showSlide(currentSlide);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        showSlide(currentSlide);
+      }
+    }
+
+    // Show the initial slide
+    showSlide(currentSlide);
+  </script>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+    crossorigin="anonymous"
+  ></script>
+</html>

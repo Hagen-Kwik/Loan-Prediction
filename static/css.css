@@ -1,0 +1,79 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+}
+
+.container-fluid {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 50px; /* Increase padding for more space */
+  max-width: 800px; /* Increase max-width for a wider container */
+}
+
+.slide {
+  display: none;
+}
+
+.slide.active {
+  display: block;
+}
+
+/* Increase font size for larger text */
+h1 {
+  font-size: 36px; /* Adjust the font size as needed */
+}
+
+.form-label {
+  font-size: 20px; /* Adjust the font size as needed */
+}
+
+.form-check-label {
+  font-size: 18px; /* Adjust the font size as needed */
+}
+
+/* Increase input size for larger input fields */
+.form-control {
+  font-size: 18px;
+  padding: 15px; /* Increase padding for more space inside the input */
+}
+
+/* Increase button size for larger buttons */
+.btn {
+  font-size: 20px;
+  padding: 12px 24px; /* Increase padding for more space inside the button */
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Increase radio button size */
+.form-check-input {
+  width: 24px; /* Adjust the width as needed */
+  height: 24px; /* Adjust the height as needed */
+}
+
+/* Navbar styles */
+.navbar {
+  background-color: #f8f9fa;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  margin-right: 10px; /* Adjust margin as needed */
+}
+
+/* Dropdown styles */
+.form-select {
+  font-size: 18px;
+  padding: 15px; /* Increase padding for more space inside the dropdown */
+}
