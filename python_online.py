@@ -14,8 +14,20 @@ import pickle
 url = 'lending_club_loan_two.csv'
 df_before = pd.read_csv(url)
 
+# fix date data
+# Create a new DataFrame for 'issue_d'
+df_before_issue = df_before['issue_d'].str.split('-', expand=True)
+df_before_issue.columns = ['issue_month', 'issue_year']
+
+# Create a new DataFrame for 'earliest_cr_line'
+df_before_cr_line = df_before['earliest_cr_line'].str.split('-', expand=True)
+df_before_cr_line.columns = ['cr_line_month', 'cr_line_year']
+
+# Concatenate the new DataFrames with the original DataFrame
+df_before = pd.concat([df_before, df_before_issue, df_before_cr_line], axis=1)
+
 # drop data
-columns_to_drop = ['emp_title', 'address', 'issue_d', 'title', 'earliest_cr_line', 'initial_list_status', 'grade', 'sub_grade', 'purpose']
+columns_to_drop = ['emp_title', 'address', 'title', 'earliest_cr_line', 'issue_d', 'grade', 'sub_grade', 'purpose','initial_list_status']
 df_before = df_before.drop(columns=columns_to_drop)
 
 # label encoder 
@@ -26,6 +38,8 @@ df_before['home_ownership'] = le.fit_transform(df_before['home_ownership'])
 df_before['verification_status'] = le.fit_transform(df_before['verification_status'])
 df_before['loan_status'] = le.fit_transform(df_before['loan_status'])
 df_before['application_type'] = le.fit_transform(df_before['application_type'])
+df_before['cr_line_month'] = le.fit_transform(df_before['cr_line_month'])
+df_before['issue_month'] = le.fit_transform(df_before['issue_month'])
 
 # impute data
 df_before['emp_length'].fillna(df_before['emp_length'].median(), inplace=True)
@@ -64,8 +78,6 @@ X_train_resampled, y_train_resampled = SMOTEENN(sampling_strategy='all', enn=Edi
 # train data
 clf = RandomForestClassifier(n_estimators=83, bootstrap=True, criterion='gini', max_depth=None,  random_state=0)
 clf.fit(X_train_resampled, y_train_resampled)
-y_pred_test = clf.predict(X_test)
-accuracy_test = accuracy_score(y_test, y_pred_test)
 
 # rb to read, wb to write
 with open('random_forest_model.pkl', 'wb') as file:

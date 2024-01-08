@@ -31,6 +31,10 @@ def predict():
             'application_type': int(request.form['application_type']),
             'mort_acc': int(request.form['mort_acc']),
             'pub_rec_bankruptcies': int(request.form['pub_rec_bankruptcies']),
+            'issue_month': int(request.form['issue_month']),
+            'issue_year': int(request.form['issue_year']),
+            'cr_line_month': int(request.form['cr_line_month']),
+            'cr_line_year': int(request.form['cr_line_year']),
         }
 
         data_changed = np.array(list(user_data.values())).reshape(1, -1)

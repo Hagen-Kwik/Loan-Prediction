@@ -248,14 +248,69 @@
               <div class="mb-3">
                 <label for="publicRecordsBankruptcies" class="form-label">Public Records Bankruptcies</label>
                 <input
-                  type="number"
-                  class="form-control"
-                  id="publicRecordsBankruptcies"
-                  name="pub_rec_bankruptcies"
-                  required
-                />
+                  type="number" class="form-control" id="publicRecordsBankruptcies" name="pub_rec_bankruptcies" required/>
               </div>
             </div>
+
+            <!-- Issue date -->
+            <div class="slide">
+              <div class="mb-3 row">
+                <div class="col-md-6">
+                  <label for="issueMonth" class="form-label">Issue Month</label>
+                  <select class="form-select" id="issueMonth" name="issue_month" required>
+                    <option value="" selected disabled>Select Issue Month</option>
+                    <option value="1">January</option>
+                    <option value="0">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="2">December</option>
+                  </select>
+                </div>
+            
+                <div class="col-md-6">
+                  <label for="issueYear" class="form-label">Issue Year</label>
+                  <input type="number" class="form-control" id="issueYear" name="issue_year" placeholder="e.g 1987" required>
+                </div>
+              </div>
+            </div>
+          
+            <!-- credit_line date -->
+            <div class="slide">
+              <div class="mb-3 row">
+                <div class="col-md-6">
+                  <label for="crLineMonth" class="form-label">Earliest Credit Line Month</label>
+                  <select class="form-select" id="crLineMonth" name="cr_line_month" required>
+                    <option value="" selected disabled>Select Issue Month</option>
+                    <option value="1">January</option>
+                    <option value="0">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="2">December</option>
+                  </select>
+                </div>
+            
+                <div class="col-md-6">
+                  <label for="crLineYear" class="form-label">Earliest Credit Line Year</label>
+                  <input type="number" class="form-control" id="crLineYear" name="cr_line_year" placeholder="e.g 1987" required>
+                </div>
+              </div>
+            </div>
+            
+            
 
             <!-- Navigation Buttons -->
             <div class="btn-container">
